@@ -16,7 +16,7 @@ em{font-style:italic;color:var(--rose)}
 section{padding:clamp(4rem,10vw,8rem) 0}
 .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem;display:block}
 .lead{color:var(--soft);max-width:52ch;margin-top:1.1rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;line-height:1.25;gap:.6rem;padding:1rem 1.9rem;border-radius:99px;background:var(--deep);color:var(--on-deep);font:500 .78rem var(--sans);letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--deep);cursor:pointer;transition:background .65s var(--ease),color .65s var(--ease),border-color .65s var(--ease),box-shadow .65s var(--ease)}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.9rem;border-radius:99px;background:var(--deep);color:var(--on-deep);font:500 .78rem var(--sans);letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--deep);cursor:pointer;transition:background .65s var(--ease),color .65s var(--ease),border-color .65s var(--ease),box-shadow .65s var(--ease)}
 .btn:hover{background:color-mix(in srgb,var(--deep) 84%,var(--rose));border-color:color-mix(in srgb,var(--deep) 84%,var(--rose));color:var(--on-deep);transform:none;box-shadow:0 10px 24px -16px rgba(31,36,35,.45)}
 .btn.ghost{background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--ink) 45%,transparent)}
 .btn.ghost:hover{background:color-mix(in srgb,var(--ink) 8%,var(--bg));color:var(--ink);border-color:var(--ink);transform:none;box-shadow:none}
@@ -175,15 +175,33 @@ nav ul a{display:block;padding:1rem 0;font-size:.9rem;border-bottom:1px solid va
 @media(max-width:960px){.rgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.rgrid{grid-template-columns:1fr}.score b{font-size:2.8rem}}
 
-/* Requested interaction polish: no text/image selection and no button travel. */
-html,body,*{
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  user-select:none;
-}
+/* Prevent dragging images without disabling normal text selection. */
 img,svg{
   -webkit-user-drag:none;
   user-drag:none;
+}
+
+::selection{
+  background:transparent;
+  color:inherit;
+}
+
+::-moz-selection{
+  background:transparent;
+  color:inherit;
+}
+
+html,
+body,
+a,
+button,
+img,
+svg,
+input,
+select,
+textarea,
+[role="button"]{
+  -webkit-tap-highlight-color:transparent;
 }
 .btn,.btn:hover,.btn:focus,.btn:active{
   transform:none !important;
@@ -194,6 +212,7 @@ img,svg{
   .hero{padding-top:96px;}
   .badge{left:.25rem;bottom:1.25rem;}
 }
+
 @media(max-width:420px){
   .badge{position:relative;left:auto;bottom:auto;margin-top:.8rem;width:max-content;max-width:100%;}
   .proof{gap:1.1rem;}
